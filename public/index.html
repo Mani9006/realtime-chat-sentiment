@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Sentiment - Real-time Chat with Sentiment Analysis</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-container">
+      <div class="login-logo">
+        <span class="logo-icon">💬</span>
+        <h1>Chat Sentiment</h1>
+        <p class="login-subtitle">Real-time chat with AI-powered sentiment analysis</p>
+      </div>
+
+      <form id="login-form" class="login-form">
+        <div class="form-group">
+          <label for="username-input">Choose a username</label>
+          <input
+            type="text"
+            id="username-input"
+            placeholder="Enter your username..."
+            maxlength="30"
+            autocomplete="off"
+            required
+          >
+          <span class="input-hint">Letters, numbers, hyphens, and underscores only</span>
+        </div>
+
+        <div class="form-group">
+          <label>Select a room</label>
+          <div id="room-list" class="room-list">
+            <!-- Rooms populated by JS -->
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="join-btn">
+          Join Chat
+        </button>
+
+        <div id="login-error" class="login-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Chat Screen -->
+  <div id="chat-screen" class="chat-screen hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="logo-icon">💬</span>
+        <span class="app-title">Chat Sentiment</span>
+      </div>
+
+      <div class="room-info">
+        <h3 id="current-room-name">Room</h3>
+        <p id="current-room-desc" class="room-desc"></p>
+      </div>
+
+      <div class="online-users-section">
+        <div class="section-header">
+          <span class="status-dot online"></span>
+          <h4>Online Users</h4>
+          <span id="online-count" class="badge">0</span>
+        </div>
+        <ul id="online-users" class="online-users"></ul>
+      </div>
+
+      <div class="rooms-section">
+        <div class="section-header">
+          <h4>Rooms</h4>
+        </div>
+        <ul id="rooms-list" class="rooms-list"></ul>
+      </div>
+
+      <div class="sentiment-legend">
+        <h4>Sentiment Legend</h4>
+        <div class="legend-items">
+          <span class="legend-item"><span class="sentiment-dot very-positive"></span> Very Positive</span>
+          <span class="legend-item"><span class="sentiment-dot positive"></span> Positive</span>
+          <span class="legend-item"><span class="sentiment-dot neutral"></span> Neutral</span>
+          <span class="legend-item"><span class="sentiment-dot negative"></span> Negative</span>
+          <span class="legend-item"><span class="sentiment-dot very-negative"></span> Very Negative</span>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="leave-btn" class="btn btn-danger btn-sm">Leave Room</button>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <!-- Chat Header -->
+      <header class="chat-header">
+        <div class="chat-header-info">
+          <h2 id="chat-room-title">Room</h2>
+          <div class="typing-indicator" id="typing-indicator"></div>
+        </div>
+        <div class="chat-header-actions">
+          <button id="toggle-sentiment-btn" class="btn btn-icon" title="Toggle sentiment display">
+            😊
+          </button>
+          <button id="search-btn" class="btn btn-icon" title="Search messages">
+            🔍
+          </button>
+        </div>
+      </header>
+
+      <!-- Messages Container -->
+      <div id="messages-container" class="messages-container">
+        <div id="messages" class="messages"></div>
+        <div id="typing-bar" class="typing-bar hidden">
+          <span class="typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span id="typing-text">someone is typing</span>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <footer class="message-input-area">
+        <div class="sentiment-preview hidden" id="sentiment-preview">
+          <span id="sentiment-emoji">😐</span>
+          <span id="sentiment-label">neutral</span>
+        </div>
+        <form id="message-form" class="message-form">
+          <input
+            type="text"
+            id="message-input"
+            placeholder="Type a message..."
+            maxlength="500"
+            autocomplete="off"
+            disabled
+          >
+          <button type="submit" class="btn btn-primary" id="send-btn" disabled>
+            Send
+          </button>
+        </form>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Search Messages</h3>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="search-input" placeholder="Search messages..." class="search-input">
+        <div id="search-results" class="search-results"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat.js"></script>
+</body>
+</html>
