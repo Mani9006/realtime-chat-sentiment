@@ -1,0 +1,7 @@
+flowchart LR
+    Client[Browser Client] <-->|Socket.IO| Server[Express Server]
+    Server --> RoomMgr[Room Manager]
+    Server --> UserMgr[User Manager]
+    Server --> Sentiment[Lexicon Sentiment<br/>negation + intensifiers]
+    Server --> History[In-memory + JSON Backup]
+    Sentiment --> Stats[Per-room Analytics]

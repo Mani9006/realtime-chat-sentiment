@@ -273,3 +273,38 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Built with Node.js, Express, Socket.IO, and lots of caffeine.**
+
+---
+
+<!-- showcase:start -->
+
+## Architecture
+
+```mermaid
+flowchart LR
+    Client[Browser Client] <-->|Socket.IO| Server[Express Server]
+    Server --> RoomMgr[Room Manager]
+    Server --> UserMgr[User Manager]
+    Server --> Sentiment[Lexicon Sentiment<br/>negation + intensifiers]
+    Server --> History[In-memory + JSON Backup]
+    Sentiment --> Stats[Per-room Analytics]
+```
+
+## Test Results
+
+![Test results](docs/test_results.png)
+
+**92 passing**, **0 failing**, **0 skipped** (total 92, framework: Jest)
+
+## References & Further Reading
+
+- Hutto, C. J. & Gilbert, E. (2014). *VADER: A Parsimonious Rule-based Model for Sentiment Analysis of Social Media Text.* ICWSM-14. [↗](https://ojs.aaai.org/index.php/ICWSM/article/view/14550)
+- Fette, I. & Melnikov, A. (2011). *The WebSocket Protocol.* RFC 6455. [↗](https://datatracker.ietf.org/doc/html/rfc6455)
+
+## Author
+
+**Manikanta Reddy Mandadhi** — Senior Data Scientist (RAG / Agentic AI)
+
+GitHub: [@Mani9006](https://github.com/Mani9006/realtime-chat-sentiment) · LinkedIn: [reddy1999](https://www.linkedin.com/in/reddy1999) · Portfolio: [manikantabio.com](https://www.manikantabio.com)
+
+<!-- showcase:end -->
